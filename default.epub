@@ -17,6 +17,7 @@ $endfor$
 </head>
 <body>
 $if(titlepage)$
+  <div class="bookinfo">
   <h1 class="title">$title$</h1>
 $if(subtitle)$
   <h1 class="subtitle">$subtitle$</h1>
@@ -26,6 +27,13 @@ $for(author)$
 $endfor$
 $if(date)$
   <h3 class="date">$date$</h3>
+$endif$
+  </div>
+$if(abstract)$
+  <div class="abstract">$abstract$</div>
+$endif$
+$if(declare)$
+  <div class="declare">$declare$</div>
 $endif$
 $else$
 $body$
