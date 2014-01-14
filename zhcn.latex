@@ -24,22 +24,25 @@ $if(euro)$
   \usepackage{eurosym}
 $endif$
 \else % if luatex or xelatex
-  \usepackage{fontspec} 	% 允許設定字體
-  \usepackage{xeCJK} 		% 分開設置中英文字型
-  \setCJKmainfont{Adobe Song Std} 	% 設定中文字型
-  \setCJKfamilyfont{adobeKaiti}{Adobe Kaiti Std}
-  \makeatother
-  \renewenvironment{quote}
-    {\CJKfamily{adobeKaiti}\list{}{\rightmargin\leftmargin}%
+  \usepackage{fontspec}   % 允許設定字體
+  \usepackage{xeCJK}    % 分開設置中英文字型
+  \XeTeXlinebreaklocale "zh"  % 針對中文自動換行
+  \XeTeXlinebreakskip = 0pt plus 1pt % 字與字之間加入0pt至1pt的間距，確保左右對整齊
+
+  \setCJKmainfont[BoldFont=Adobe Heiti Std,ItalicFont=Adobe Kaiti Std]{Adobe Song Std} % 设定中文字型
+  \setCJKsansfont[BoldFont=Adobe Heiti Std]{STXihei}
+  \setCJKmonofont{Adobe Fangsong Std}
+
+  \renewenvironment{quote} % 设定引用段落字体
+    {\itshape\list{}{\rightmargin\leftmargin}%
      \item\relax}
     {\endlist}
-  \makeatletter
-  \setmainfont{Georgia} 	% 設定英文字型
-  \setromanfont{Georgia} 	% 字型
+
+  \setmainfont{Georgia}   % 設定英文字型
+  \setromanfont{Georgia}  % 字型
   \setmonofont{Courier New}
+
   \linespread{1.2}\selectfont 	% 行距
-  \XeTeXlinebreaklocale "zh" 	% 針對中文自動換行
-  \XeTeXlinebreakskip = 0pt plus 1pt % 字與字之間加入0pt至1pt的間距，確保左右對整齊
   \parindent 0em 		% 段落縮進
   \setlength{\parskip}{10pt} 	% 段落之間的距離
   \ifxetex
