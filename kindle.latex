@@ -35,6 +35,9 @@ $endif$
   \linespread{1.1}\selectfont 	% 行距
   \parindent 0em 		% 段落縮進
   \setlength{\parskip}{0.5em} 	% 段落之間的距離
+
+  \usepackage{color} % 设置颜色
+
   \ifxetex
     \usepackage{xltxtra,xunicode}
   \fi
@@ -175,16 +178,47 @@ $if(cover-image)$ % 封面图片
 \newgeometry{top=0cm,bottom=0cm,left=0cm,right=0cm}
   \includegraphics[width=9cm,height=11.998cm]{$cover-image$}
 \restoregeometry
+$else$
+\definecolor{PageColor}{rgb}{0.21,0.42,0.73}
+\pagestyle{empty}
+\pagecolor{PageColor}
+\newgeometry{top=1cm,bottom=1cm,left=2.5cm,right=1cm}
+\addtolength{\marginparsep}{10pt}
+\addtolength{\marginparwidth}{1cm}
+\marginpar{
+  \setlength{\unitlength}{1cm}
+  \color{white}
+  \begin{picture}(6,12)
+    \linethickness{2pt}
+    \put(-7,0){\line(0,1){15}}
+    \put(-9,3){\line(1,0){2}}
+    \put(-9,5.2){\line(1,0){2}}
+    \put(-9,7.4){\line(1,0){2}}
+    \put(-9,9.6){\line(1,0){2}}
+    \put(-9,11.8){\line(1,0){2}}
+  \end{picture}
+}
+{\centering\color{white}\bfseries
+  \fontsize{0.75cm}{0.75cm} $title$\par
+  \vspace{1cm}
+  \large $author$\par
+  \vfill
+  \rule{4cm}{0.4pt}\\[\baselineskip]
+  \large $publisher$\par
+}
+\restoregeometry
+\clearpage
+\pagecolor{white}
 $endif$
+
 $if(title)$
 \maketitle
-$endif$
 $if(abstract)$
 \vfill
 \begin{abstract}
 $abstract$
 \end{abstract}
-\vspace{1cm}
+$endif$
 $endif$
 
 $if(declare)$
