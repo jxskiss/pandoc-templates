@@ -180,9 +180,11 @@ $if(title)$
 \maketitle
 $endif$
 $if(abstract)$
+\vfill
 \begin{abstract}
 $abstract$
 \end{abstract}
+\vspace{1cm}
 $endif$
 
 $if(declare)$
