@@ -200,6 +200,7 @@ $else$
 }
 {\centering\color{white}\bfseries
   \fontsize{0.75cm}{0.75cm} $title$\par
+  \large $subtitle$\par
   \vspace{1cm}
   $for(author)$\large $author$\par$endfor$
   \vfill
