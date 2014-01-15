@@ -201,7 +201,7 @@ $else$
 {\centering\color{white}\bfseries
   \fontsize{0.75cm}{0.75cm} $title$\par
   \vspace{1cm}
-  \large $author$\par
+  $for(author)$\large $author$\par$endfor$
   \vfill
   \rule{4cm}{0.4pt}\\[\baselineskip]
   \large $publisher$\par
@@ -212,13 +212,13 @@ $else$
 $endif$
 
 $if(title)$
+\newgeometry{top=0cm,bottom=1cm,left=1cm,right=1cm}
 \maketitle
 $if(abstract)$
 \vfill
-\begin{abstract}
 $abstract$
-\end{abstract}
 $endif$
+\restoregeometry
 $endif$
 
 $if(declare)$
