@@ -1,5 +1,5 @@
 ﻿\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
-\usepackage[paperwidth=9cm,paperheight=12cm,top=0.1cm,bottom=0.2cm,left=0.2cm,right=0.2cm]{geometry}
+\usepackage[paperwidth=9cm,paperheight=12cm,top=0.2cm,bottom=0.2cm,left=0.2cm,right=0.2cm]{geometry}
 \special{papersize=9cm,12cm}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
@@ -171,6 +171,11 @@ $header-includes$
 $endfor$
 
 \begin{document}
+$if(cover-image)$ % 封面图片
+\newgeometry{top=0cm,bottom=0cm,left=0cm,right=0cm}
+  \includegraphics[width=9cm,height=11.998cm]{$cover-image$}
+\restoregeometry
+$endif$
 $if(title)$
 \maketitle
 $endif$
