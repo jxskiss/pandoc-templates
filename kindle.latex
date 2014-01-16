@@ -179,6 +179,7 @@ $if(cover-image)$ % 封面图片
   \includegraphics[width=9cm,height=11.998cm]{$cover-image$}
 \restoregeometry
 $else$
+$if(cover)$
 \definecolor{PageColor}{rgb}{0.21,0.42,0.73}
 \pagestyle{empty}
 \pagecolor{PageColor}
@@ -210,6 +211,7 @@ $else$
 \restoregeometry
 \clearpage
 \pagecolor{white}
+$endif$
 $endif$
 
 $if(title)$
