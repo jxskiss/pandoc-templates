@@ -36,6 +36,11 @@ $endif$
   \parindent 0em 		% 段落縮進
   \setlength{\parskip}{0.5em} 	% 段落之間的距離
 
+  \renewcommand\contentsname{目录} % 中文化固定名称
+  \renewcommand\abstractname{摘要}
+  \renewcommand\figurename{图}
+  \renewcommand\tablename{表}
+
   \usepackage{color} % 设置颜色
 
   \ifxetex
@@ -237,7 +242,6 @@ $if(toc)$
 {
 \hypersetup{linkcolor=black}
 \setcounter{tocdepth}{$toc-depth$}
-\renewcommand\contentsname{目录}
 \newpage
 \tableofcontents
 }
