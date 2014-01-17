@@ -15,13 +15,16 @@ $if(euro)$
 $endif$
 \else % if luatex or xelatex
   \usepackage{fontspec} 	% 允許設定字體
-  \usepackage{xeCJK} 		% 分開設置中英文字型
+  \usepackage[AutoFallBack=true]{xeCJK} 		% 分開設置中英文字型
   \XeTeXlinebreaklocale "zh"  % 針對中文自動換行
   \XeTeXlinebreakskip = 0pt plus 1pt % 字與字之間加入0pt至1pt的間距，確保左右對整齊
 
-  \setCJKmainfont[BoldFont=SimHei,ItalicFont=STKaiti]{PMingLiU} % 设定中文字型
+  \xeCJKDeclareSubCJKBlock{Ext-A}{ "2600 -> "26FF } % Miscellaneous Symbols, 易经八卦，阴、阳爻
+  \xeCJKDeclareSubCJKBlock{SPUA}{ "E400 -> "E4DA , "E500 -> "E5E8 , "E600 -> "E6CE } % UNICODE保留区域
+  \setCJKmainfont[BoldFont=SimHei,ItalicFont=STKaiti,SPUA=SunmanPUA,Ext-A=Sun-ExtA]{PMingLiU} % 设定中文字型
   \setCJKsansfont[BoldFont=SimHei]{STXihei}
   \setCJKmonofont{STFangsong}
+  \setCJKfallbackfamilyfont{\CJKrmdefault}{ {Sun-ExtA}, {Sun-ExtB} } % 生僻字备用字体
 
   \renewenvironment{quote} % 设定引用段落字体
     {\itshape\list{}{\rightmargin\leftmargin}%
