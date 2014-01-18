@@ -25,13 +25,18 @@ $if(euro)$
 $endif$
 \else % if luatex or xelatex
   \usepackage{fontspec}   % 允許設定字體
-  \usepackage{xeCJK}    % 分開設置中英文字型
+  \usepackage[AutoFallBack=true]{xeCJK}    % 分開設置中英文字型
   \XeTeXlinebreaklocale "zh"  % 針對中文自動換行
   \XeTeXlinebreakskip = 0pt plus 1pt % 字與字之間加入0pt至1pt的間距，確保左右對整齊
 
-  \setCJKmainfont[BoldFont=Adobe Heiti Std,ItalicFont=Adobe Kaiti Std]{Adobe Song Std} % 设定中文字型
-  \setCJKsansfont[BoldFont=Adobe Heiti Std]{STXihei}
-  \setCJKmonofont{Adobe Fangsong Std}
+    % Miscellaneous Symbols, 易经八卦，阴、阳爻, % Yijing Hexagram Symbols, 易经六十四卦
+  \xeCJKDeclareSubCJKBlock{YiJing}{ "2600 -> "26FF, "4DC0 -> "4DFF }
+  % \xeCJKDeclareSubCJKBlock{SPUA}{ "E400 -> "E4DA , "E500 -> "E5E8 , "E600 -> "E6CE } % UNICODE保留区域
+  % \setCJKmainfont[BoldFont=SimHei,ItalicFont=STKaiti,SPUA=SunmanPUA,Ext-A=Sun-ExtA]{SimSun} % 设定中文字型
+  \setCJKmainfont[BoldFont=SimHei,ItalicFont=KaiTi,YiJing=Segoe UI Symbol]{SimSun} % 设定中文字型
+  \setCJKsansfont[BoldFont={* Bold}]{Microsoft YaHei}
+  \setCJKmonofont{FangSong}
+  % \setCJKfallbackfamilyfont{\CJKrmdefault}{ {Sun-ExtA}, {Sun-ExtB} } % 生僻字备用字体
 
   \renewenvironment{quote} % 设定引用段落字体
     {\itshape\list{}{\rightmargin\leftmargin}%
@@ -45,6 +50,14 @@ $endif$
   \linespread{1.2}\selectfont 	% 行距
   \parindent 0em 		% 段落縮進
   \setlength{\parskip}{10pt} 	% 段落之間的距離
+
+  \renewcommand\contentsname{目录} % 中文化固定名称
+  \renewcommand\abstractname{摘要}
+  \renewcommand\figurename{图}
+  \renewcommand\tablename{表}
+
+  \usepackage{color} % 设置颜色
+
   \ifxetex
     \usepackage{xltxtra,xunicode}
   \fi
@@ -181,6 +194,46 @@ $header-includes$
 $endfor$
 
 \begin{document}
+$if(cover-image)$ % 封面图片
+\newgeometry{top=0cm,bottom=0cm,left=0cm,right=0cm}
+  \includegraphics[width=21cm,height=29.696cm]{$cover-image$}
+\restoregeometry
+$else$
+$if(cover)$
+\definecolor{PageColor}{rgb}{0.21,0.42,0.73}
+\pagestyle{empty}
+\pagecolor{PageColor}
+\newgeometry{top=4cm,bottom=4cm,left=5cm,right=2cm}
+\addtolength{\marginparsep}{10pt}
+\addtolength{\marginparwidth}{2cm}
+\marginpar{
+  \setlength{\unitlength}{1cm}
+  \color{white}
+  \begin{picture}(6,12)
+    \linethickness{3pt}
+    \put(-16,-14){\line(0,1){32}}
+    \put(-20,-9){\line(1,0){4}}
+    \put(-20,-4){\line(1,0){4}}
+    \put(-20,1){\line(1,0){4}}
+    \put(-20,6){\line(1,0){4}}
+    \put(-20,11){\line(1,0){4}}
+  \end{picture}
+}
+{\centering\color{white}\bfseries
+  \fontsize{1.5cm}{1.5cm} $title$\par
+  \fontsize{1.0cm}{1.0cm} $subtitle$\par
+  \vspace{1cm}
+  $for(author)$\fontsize{1.0cm}{1.0cm} $author$\par$endfor$
+  \vfill
+  \rule{8cm}{0.4pt}\\[\baselineskip]
+  \fontsize{1.0cm}{1.0cm} $publisher$\par
+}
+\restoregeometry
+\clearpage
+\pagecolor{white}
+$endif$
+$endif$
+
 $if(title)$
 \maketitle
 $endif$
@@ -198,7 +251,6 @@ $if(toc)$
 {
 \hypersetup{linkcolor=black}
 \setcounter{tocdepth}{$toc-depth$}
-\renewcommand\contentsname{目录}
 \tableofcontents
 }
 $endif$
