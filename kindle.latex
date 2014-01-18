@@ -234,11 +234,6 @@ $endif$
 \restoregeometry
 $endif$
 
-$if(declare)$
-\newpage
-$declare$
-$endif$
-
 $for(include-before)$
 $include-before$
 $endfor$
