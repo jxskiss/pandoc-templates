@@ -1,17 +1,6 @@
 ﻿\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
-\usepackage{geometry} 		% 設定邊界
-\geometry{
-  top=1in,
-  inner=1in,
-  outer=1in,
-  bottom=1in,
-  headheight=3ex,
-  headsep=2ex
-}
-\usepackage[T1]{fontenc}\usepackage{fancyhdr}
-\usepackage{lastpage}
-\pagestyle{fancyplain}
-
+\usepackage[top=1in,bottom=1in,inner=1in,outer=1in,headheight=3ex,headsep=2ex]{geometry}   % 設定邊界
+\usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -25,11 +14,11 @@ $if(euro)$
 $endif$
 \else % if luatex or xelatex
   \usepackage{fontspec}   % 允許設定字體
-  \usepackage[AutoFallBack=true]{xeCJK}    % 分開設置中英文字型
+  \usepackage[AutoFallBack=true]{xeCJK}   % 分開設置中英文字型
   \XeTeXlinebreaklocale "zh"  % 針對中文自動換行
   \XeTeXlinebreakskip = 0pt plus 1pt % 字與字之間加入0pt至1pt的間距，確保左右對整齊
 
-    % Miscellaneous Symbols, 易经八卦，阴、阳爻, % Yijing Hexagram Symbols, 易经六十四卦
+  % Miscellaneous Symbols, 易经八卦，阴、阳爻, % Yijing Hexagram Symbols, 易经六十四卦
   \xeCJKDeclareSubCJKBlock{YiJing}{ "2600 -> "26FF, "4DC0 -> "4DFF }
   % \xeCJKDeclareSubCJKBlock{SPUA}{ "E400 -> "E4DA , "E500 -> "E5E8 , "E600 -> "E6CE } % UNICODE保留区域
   % \setCJKmainfont[BoldFont=SimHei,ItalicFont=STKaiti,SPUA=SunmanPUA,Ext-A=Sun-ExtA]{SimSun} % 设定中文字型
@@ -37,26 +26,26 @@ $endif$
   \setCJKsansfont[BoldFont={* Bold}]{Microsoft YaHei}
   \setCJKmonofont{FangSong}
   % \setCJKfallbackfamilyfont{\CJKrmdefault}{ {Sun-ExtA}, {Sun-ExtB} } % 生僻字备用字体
+  \setmainfont{Georgia}   % 設定英文字型
+  \setromanfont{Georgia}
+  \setmonofont{Courier New}
+
+  \linespread{1.2}\selectfont   % 行距
+  \parindent 0em                % 段落縮進
+  \setlength{\parskip}{10pt}    % 段落間距
 
   \renewenvironment{quote} % 设定引用段落字体
     {\itshape\list{}{\rightmargin\leftmargin}%
      \item\relax}
     {\endlist}
-
-  \setmainfont{Georgia}   % 設定英文字型
-  \setromanfont{Georgia}  % 字型
-  \setmonofont{Courier New}
-
-  \linespread{1.2}\selectfont 	% 行距
-  \parindent 0em 		% 段落縮進
-  \setlength{\parskip}{10pt} 	% 段落之間的距離
-
   \renewcommand\contentsname{目录} % 中文化固定名称
   \renewcommand\abstractname{摘要}
   \renewcommand\figurename{图}
   \renewcommand\tablename{表}
 
   \usepackage{color} % 设置颜色
+  \usepackage{fancyhdr} % 设置页眉页脚
+  \usepackage{lastpage}
 
   \ifxetex
     \usepackage{xltxtra,xunicode}
@@ -156,14 +145,6 @@ $endif$
 \setlength{\parindent}{0pt}
 %\setlength{\parskip}{6pt plus 2pt minus 1pt}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
-
-\usepackage{titling}
-\setlength{\droptitle}{-8em} 	% 將標題移動至頁面的上面
-
-\usepackage{fancyhdr}
-\usepackage{lastpage}
-\pagestyle{fancyplain}
-
 $if(numbersections)$
 \setcounter{secnumdepth}{5}
 $else$
@@ -233,6 +214,7 @@ $if(cover)$
 \pagecolor{white}
 $endif$
 $endif$
+\pagestyle{fancyplain}
 
 $if(title)$
 \maketitle
