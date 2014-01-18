@@ -32,9 +32,6 @@ $endif$
 $if(abstract)$
   <div class="abstract">$abstract$</div>
 $endif$
-$if(declare)$
-  <div class="declare">$declare$</div>
-$endif$
 $else$
 $body$
 $endif$
