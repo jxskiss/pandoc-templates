@@ -21,12 +21,11 @@ $endif$
 
   % Miscellaneous Symbols, 易经八卦，阴、阳爻, % Yijing Hexagram Symbols, 易经六十四卦
   \xeCJKDeclareSubCJKBlock{YiJing}{ "2600 -> "26FF, "4DC0 -> "4DFF }
-  % \xeCJKDeclareSubCJKBlock{SPUA}{ "E400 -> "E4DA , "E500 -> "E5E8 , "E600 -> "E6CE } % UNICODE保留区域
-  % \setCJKmainfont[BoldFont=SimHei,ItalicFont=STKaiti,SPUA=SunmanPUA,Ext-A=Sun-ExtA]{SimSun} % 设定中文字型
-  \setCJKmainfont[BoldFont=SimHei,ItalicFont=KaiTi,YiJing=Segoe UI Symbol]{SimSun} % 设定中文字型
+  \xeCJKDeclareSubCJKBlock{ExtB}{ "20000 -> "2A6DF }
+  \xeCJKDeclareSubCJKBlock{SPUA}{ "E400 -> "E4DA , "E500 -> "E5E8 , "E600 -> "E6CE } % UNICODE保留区域
+  \setCJKmainfont[BoldFont=SimHei,ItalicFont=KaiTi,YiJing=Segoe UI Symbol,ExtB=SimSun-ExtB,SPUA=SunmanPUA]{SimSun} % 设定中文字型
   \setCJKsansfont[BoldFont={* Bold}]{Microsoft YaHei}
   \setCJKmonofont{FangSong}
-  % \setCJKfallbackfamilyfont{\CJKrmdefault}{ {Sun-ExtA}, {Sun-ExtB} } % 生僻字备用字体
 
   \renewenvironment{quote} % 设定引用段落字体
     {\itshape\list{}{\rightmargin\leftmargin}%
