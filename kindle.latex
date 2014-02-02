@@ -14,8 +14,8 @@ $if(euro)$
   \usepackage{eurosym}
 $endif$
 \else % if luatex or xelatex
-  \usepackage{fontspec} 	% 允許設定字體
-  \usepackage[AutoFallBack=true]{xeCJK} 		% 分開設置中英文字型
+  \usepackage{fontspec}   % 允許設定字體
+  \usepackage[AutoFallBack=true]{xeCJK}   % 分開設置中英文字型
   \XeTeXlinebreaklocale "zh"  % 針對中文自動換行
   \XeTeXlinebreakskip = 0pt plus 1pt % 字與字之間加入0pt至1pt的間距，確保左右對整齊
 
