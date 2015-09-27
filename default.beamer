@@ -167,6 +167,10 @@ $if(biblatex)$
 \end{frame}
 
 $endif$
+$if(references)$
+
+$references$
+$endif$
 $for(include-after)$
 $include-after$
 
