@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"$if(lang)$ xml:lang="$lang$"$endif$>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title>$pagetitle$</title>
+$if(highlighting-css)$
+  <style type="text/css">
+$highlighting-css$
+  </style>
+$endif$
+$for(css)$
+  <link rel="stylesheet" type="text/css" href="$css$" />
+$endfor$
+</head>
+<body>
+$if(titlepage)$
+  <div id="titlepage">
+    <div id="bookinfo">
+      <p class="title">$title$</p>
+$if(subbooks)$$for(subbooks)$
+      <p class="subbooks">$subbooks$</p>
+$endfor$$endif$
+$for(author)$
+      <p class="author">$author$</p>
+$endfor$
+    </div>
+$if(publisher)$
+    <div id="pubinfo">
+      <p class="publisher">$publisher$</p>
+      $if(date)$<p class="date">$date$</p>$endif$
+      $if(isbn)$<p class="isbn">ISBN：$isbn$</p>$endif$
+    </div>
+  </div>
+$endif$
+$else$
+$body$
+$endif$
+</body>
+</html>
+
