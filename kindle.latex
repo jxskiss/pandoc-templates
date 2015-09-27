@@ -150,6 +150,8 @@ $endif$
 \setlength{\parindent}{2em}
 %\setlength{\parskip}{6pt plus 2pt minus 1pt}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 % \usepackage{titling}
 % \setlength{\droptitle}{-2em} 	% 將標題移動至頁面的上面
