@@ -1,4 +1,5 @@
 ﻿\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+\pagestyle{empty}   % 首页以后页码空白
 \usepackage[paperwidth=9cm,paperheight=12cm,top=0.2cm,bottom=0.2cm,left=0.2cm,right=0.2cm]{geometry}
 \special{papersize=9cm,12cm}
 \usepackage[T1]{fontenc}
@@ -15,11 +16,12 @@ $if(euro)$
 $endif$
 \else % if luatex or xelatex
   \usepackage{fontspec}   % 允許設定字體
+  \usepackage{indentfirst}  % 首段缩进
   \usepackage[AutoFallBack=true]{xeCJK}   % 分開設置中英文字型
   \XeTeXlinebreaklocale "zh"  % 針對中文自動換行
   \XeTeXlinebreakskip = 0pt plus 1pt % 字與字之間加入0pt至1pt的間距，確保左右對整齊
 
-  % Miscellaneous Symbols, 易经八卦，阴、阳爻, % Yijing Hexagram Symbols, 易经六十四卦
+  % Miscellaneous Symbols, Yijing Hexagram Symbols, 易经八卦，阴、阳爻, 易经六十四卦
   \xeCJKDeclareSubCJKBlock{YiJing}{ "2600 -> "26FF, "4DC0 -> "4DFF }
   \xeCJKDeclareSubCJKBlock{ExtB}{ "20000 -> "2A6DF }
   \xeCJKDeclareSubCJKBlock{SPUA}{ "E400 -> "E4DA , "E500 -> "E5E8 , "E600 -> "E6CE } % UNICODE保留区域
@@ -27,18 +29,21 @@ $endif$
   \setCJKsansfont[BoldFont={* Bold}]{Microsoft YaHei}
   \setCJKmonofont{FangSong}
 
+  \makeatletter
   \renewenvironment{quote} % 设定引用段落字体
-    {\itshape\list{}{\rightmargin\leftmargin}%
+    {\itshape\list{}{\rightmargin 2em \leftmargin 2em}%
      \item\relax}
     {\endlist}
+  \makeatother
 
-  \setmainfont{Georgia} 	% 設定英文字型
-  \setromanfont{Georgia} 	% 字型
-  \setmonofont{Courier New}
+  % \setmainfont{Times New Roman}   % 设定英文字型
+  \setmainfont{Georgia}   % 设定英文字型
+  \setsansfont{Calibri} 	% 英文衬线字型
+  \setmonofont{Consolas} % 英文等宽字型
 
   \linespread{1.1}\selectfont 	% 行距
-  \parindent 0em 		% 段落縮進
-  \setlength{\parskip}{0.5em} 	% 段落之間的距離
+  \parindent 2em 		        % 段落縮進
+  \setlength{\parskip}{0.5em} 	% 段落间距
 
   \renewcommand\contentsname{目录} % 中文化固定名称
   \renewcommand\abstractname{摘要}
@@ -142,16 +147,28 @@ $if(strikeout)$
 % avoid problems with \sout in headers with hyperref:
 \pdfstringdefDisableCommands{\renewcommand{\sout}{}}
 $endif$
-\setlength{\parindent}{0pt}
+\setlength{\parindent}{2em}
 %\setlength{\parskip}{6pt plus 2pt minus 1pt}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 
 % \usepackage{titling}
 % \setlength{\droptitle}{-2em} 	% 將標題移動至頁面的上面
 
-\usepackage{fancyhdr}
-\usepackage{lastpage}
-\pagestyle{fancyplain}
+% \usepackage{fancyhdr}
+% \usepackage{lastpage}
+% \pagestyle{fancyplain}    % 设置页眉页脚
+
+% \@startsection{NAME}{LEVEL}{INDENT}{BEFORESKIP}{AFTERSKIP}{STYLE}
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}%
+    {\z@}{-3.5ex \@plus -1ex \@minus -.2ex}
+    {2.3ex \@plus .2ex}
+    {\centering\sffamily\bfseries\Large}}
+\renewcommand\subsection{\@startsection{subsection}{2}%
+    {\z@}{-2.5ex \@plus -.5ex \@minus -.2ex}
+    {1.3ex \@plus .2ex}
+    {\centering\sffamily\large}}
+\makeatother
 
 $if(numbersections)$
 \setcounter{secnumdepth}{5}
@@ -183,49 +200,63 @@ $header-includes$
 $endfor$
 
 \begin{document}
-$if(cover-image)$ % 封面图片
+$if(cover-image)$   % 封面图片
 \newgeometry{top=0cm,bottom=0cm,left=0cm,right=0cm}
-  \includegraphics[width=9cm,height=11.998cm]{$cover-image$}
+{\centering\includegraphics[width=\paperwidth,height=0.9998\paperheight]{$cover-image$}}
 \restoregeometry
-$else$
-$if(cover)$
-\definecolor{PageColor}{rgb}{0.21,0.42,0.73}
-\pagestyle{empty}
-\pagecolor{PageColor}
-\newgeometry{top=1cm,bottom=1cm,left=2.5cm,right=1cm}
+$else$  % 绘制封面
+\definecolor{CoverBlue}{RGB}{54,107,186}
+\definecolor{CoverPeru}{RGB}{189,95,41}
+\definecolor{CoverOlive}{RGB}{155,134,27}
+\definecolor{CoverDarkGray}{RGB}{84,85,90}
+\definecolor{CoverLightGray}{RGB}{203,199,190}
+\definecolor{CoverDarkCyan}{RGB}{56,103,113}
+\definecolor{CoverOliveDark}{RGB}{52,50,29}
+\definecolor{TextDarkCoffee}{RGB}{102,51,0}
+\definecolor{TextLightCoffee}{RGB}{140,98,56}
+
+\newgeometry{top=1cm,bottom=1cm,left=1.5cm,right=1cm}
 \addtolength{\marginparsep}{10pt}
 \addtolength{\marginparwidth}{1cm}
+\pagecolor{CoverLightGray}
 \marginpar{
   \setlength{\unitlength}{1cm}
-  \color{white}
-  \begin{picture}(6,12)
-    \linethickness{2pt}
-    \put(-7,0){\line(0,1){15}}
-    \put(-9,3){\line(1,0){2}}
-    \put(-9,5.2){\line(1,0){2}}
-    \put(-9,7.4){\line(1,0){2}}
-    \put(-9,9.6){\line(1,0){2}}
-    \put(-9,11.8){\line(1,0){2}}
+  \color{TextDarkCoffee}
+  \begin{picture}(9,12)
+    \linethickness{1pt}
+    \put(-8,0){\line(0,1){15}}
+    \put(-8.7,0){\line(0,1){15}}
+    \put(-9,3){\line(1,0){1}}
+    \put(-9,5.2){\line(1,0){1}}
+    \put(-9,7.4){\line(1,0){1}}
+    \put(-9,9.6){\line(1,0){1}}
+    \put(-9,11.8){\line(1,0){1}}
   \end{picture}
 }
-{\centering\color{white}\bfseries
-  \fontsize{0.75cm}{0.75cm} $title$\par
-  \large $subtitle$\par
-  \vspace{1cm}
-  $for(author)$\large $author$\par$endfor$
+{ \raggedleft\color{TextDarkCoffee}
+  \sffamily\bfseries
+  \LARGE $title$\par
+  \Large $subtitle$\par
+  \vspace{0.4cm}
+  \rmfamily\mdseries\large
+  $for(author)$$author$\par$endfor$
   \vfill
-  \rule{4cm}{0.4pt}\\[\baselineskip]
-  \large $publisher$\par
+  \rmfamily\mdseries\itshape\normalsize
+  \setlength{\parskip}{0em}
+  \rule{6em}{0.4pt}\par
+  $ebook-publisher$\par
+  $ebook-date$\par
+  $ebook-id$\par
 }
 \restoregeometry
 \clearpage
 \pagecolor{white}
 $endif$
-$endif$
 
 $if(title)$
-\newgeometry{top=0cm,bottom=1cm,left=1cm,right=1cm}
+\newgeometry{top=0cm,bottom=3cm,left=1cm,right=1cm}
 \maketitle
+\thispagestyle{empty}   % 首页页码空白
 $if(abstract)$
 \vfill
 $abstract$
@@ -242,6 +273,7 @@ $if(toc)$
 \hypersetup{linkcolor=black}
 \setcounter{tocdepth}{$toc-depth$}
 \newpage
+\pdfbookmark[1]{\contentsname}{contents}
 \tableofcontents
 }
 $endif$

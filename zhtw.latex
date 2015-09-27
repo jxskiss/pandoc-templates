@@ -1,4 +1,5 @@
-﻿\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+﻿% Modified from https://github.com/tzengyuxio/pages/blob/gh-pages/pandoc/pm-template.latex
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
 \usepackage{geometry} 		% 設定邊界
 \geometry{
   top=1in,
@@ -35,9 +36,10 @@ $endif$
      \item\relax}
     {\endlist}
 
-  \setmainfont{Georgia} 	% 設定英文字型
-  \setromanfont{Georgia} 	% 字型
-  \setmonofont{Courier New}
+  % \setmainfont{Times New Roman}   % 设定英文字型
+  \setmainfont{Georgia}   % 设定英文字型
+  \setsansfont{Calibri}   % 英文衬线字型
+  \setmonofont{Consolas} % 英文等宽字型
 
   \linespread{1.2}\selectfont 	% 行距
   \parindent 0em 		% 段落縮進
