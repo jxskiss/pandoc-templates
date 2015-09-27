@@ -1,0 +1,332 @@
+﻿% Modified from original pandoc default.latex template
+% NOTE: only use this with xelatex, never tested for other latex engines
+\documentclass[$if(fontsize)$$fontsize$,$else$12pt,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+\pagestyle{empty}   % 首页以后页码空白
+\usepackage[paperwidth=9cm,paperheight=12cm,top=0.2cm,bottom=0.2cm,left=0.2cm,right=0.2cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[utf8]{inputenc}
+$if(euro)$
+  \usepackage{eurosym}
+$endif$
+\else % if luatex or xelatex
+  \usepackage{xltxtra,xunicode}
+  \usepackage{fontspec}   % 允許設定字體
+
+  % 分开设置中英文字型
+  \usepackage[AutoFallBack=true]{xeCJK}
+  \XeTeXlinebreaklocale "zh"  % 針對中文自動換行
+  \XeTeXlinebreakskip = 0pt plus 1pt % 字與字之間加入0pt至1pt的間距，確保左右對整齊
+  % Miscellaneous Symbols, Yijing Hexagram Symbols, 易经八卦，阴、阳爻, 易经六十四卦等
+  \xeCJKDeclareSubCJKBlock{YiJing}{ "2600 -> "26FF, "4DC0 -> "4DFF }
+  \xeCJKDeclareSubCJKBlock{ExtB}{ "20000 -> "2A6DF }
+  \xeCJKDeclareSubCJKBlock{SPUA}{ "E400 -> "E4DA , "E500 -> "E5E8 , "E600 -> "E6CE } % UNICODE保留区域
+  % 设定中文字型
+  \setCJKmainfont[BoldFont=FZYaSong-M-GBK,ItalicFont=FangSong,YiJing=Segoe UI Symbol,ExtB=SimSun-ExtB,SPUA=SunmanPUA]{SimSun}
+  \setCJKfallbackfamilyfont{\CJKrmdefault}[AutoFakeBold]{HanaMinA,HanaMinB}
+  \setCJKsansfont[BoldFont=FZLanTingHei-B-GBK,Scale=0.95]{FZLanTingHei-M-GBK}
+  \setCJKmonofont[BoldFont=FZWeiBei-S03]{Adobe Kaiti Std}
+  \setCJKfallbackfamilyfont{\CJKttdefault}[AutoFakeBold]{FZKaiS-Extended,FZKaiS-Extended(SIP)}
+
+  % 設定英文字型
+  \setmainfont{Calibri}   % 拼音字体
+  \setsansfont{Calibri}
+  \setmonofont{Consolas}
+
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+$if(mainfont)$  % 指定英文字体替换默认字体
+  \setmainfont{$mainfont$}
+$endif$
+$if(sansfont)$
+  \setsansfont{$sansfont$}
+$endif$
+$if(monofont)$
+  \setmonofont[Mapping=tex-ansi]{$monofont$}
+$endif$
+$if(mathfont)$
+  \setmathfont(Digits,Latin,Greek){$mathfont$}
+$endif$
+\fi
+% use microtype if available
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+$if(geometry)$  % 指定页面布局替换默认布局
+\usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+$endif$
+$if(natbib)$
+\usepackage{natbib}
+\bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
+$endif$
+$if(biblatex)$
+\usepackage{biblatex}
+$if(biblio-files)$
+\bibliography{$biblio-files$}
+$endif$
+$endif$
+$if(listings)$
+\usepackage{listings}
+$endif$
+$if(lhs)$
+\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
+$endif$
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+$endif$
+$if(tables)$
+\usepackage{longtable,booktabs}
+$endif$
+$if(graphics)$
+\usepackage{graphicx}
+% Redefine \includegraphics so that, unless explicit options are
+% given, the image width will not exceed the width of the page.
+% Images get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\ScaleIfNeeded{%
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+{%
+ \catcode`\@=11\relax%
+ \gdef\includegraphics{\@ifnextchar[{\Oldincludegraphics}{\Oldincludegraphics[width=\ScaleIfNeeded]}}%
+}%
+$endif$
+\ifxetex
+  \usepackage[setpagesize=false, % page size defined by xetex
+              unicode=false, % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={$author-meta$},
+            pdftitle={$title-meta$},
+            colorlinks=true,
+            citecolor=$if(citecolor)$$citecolor$$else$blue$endif$,
+            urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
+            linkcolor=$if(linkcolor)$$linkcolor$$else$magenta$endif$,
+            pdfborder={0 0 0}}
+\urlstyle{same}  % don't use monospace font for urls
+$if(links-as-notes)$
+% Make links footnotes instead of hotlinks:
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+$endif$
+$if(strikeout)$
+\usepackage[normalem]{ulem}
+% avoid problems with \sout in headers with hyperref:
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+$endif$
+
+% 设定引用段落格式
+\makeatletter   % Make @ symbol a letter
+\renewenvironment{quote}
+  {\ttfamily\list{}{\rightmargin\leftmargin}%
+   \item\relax}
+  {\endlist}
+\renewenvironment{quotation}
+  {\ttfamily
+   \list{}{\leftmargin 1em \rightmargin 1em
+           \listparindent 2em \itemindent 2em \parsep 0em}
+   \item\relax}
+  {\endlist}
+\renewenvironment{verse}
+  {\let\\\@centercr\ttfamily
+   \list{}{\itemsep \z@ \parsep 0em \itemindent 0em \listparindent\itemindent
+           \rightmargin 0em \leftmargin 0em \advance\leftmargin 0em}
+   \punctstyle{banjiao}\centering\item\relax} % \item前加\centering，居中
+  {\endlist}
+\makeatother
+
+\renewcommand\contentsname{目录}  % 翻译固定名称
+\renewcommand\abstractname{摘要}
+\renewcommand\figurename{图}
+\renewcommand\tablename{表}
+
+\usepackage{indentfirst}          % 设置首段缩进
+\setlength{\parindent}{3.4em}     % 段落缩进距离
+\setlength{\parskip}{.5em plus .2em minus .1em}  % 段落间距
+% \linespread{1.8}\selectfont       % 行距
+\setlength{\emergencystretch}{3em}    % prevent overfull lines
+
+% 设置标题格式, titlesec与hyperref不兼容
+% \@startsection{NAME}{LEVEL}{INDENT}{BEFORESKIP}{AFTERSKIP}{STYLE}
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}%
+                      {\z@}{-3.5ex \@plus -1ex \@minus -.2ex}{2.3ex \@plus .2ex}%
+                      {\centering\sffamily\bfseries\Large}}
+\renewcommand\subsection{\@startsection{subsection}{2}%
+                      {\z@}{-2.5ex \@plus -.5ex \@minus -.2ex}{1.3ex \@plus .2ex}%
+                      {\centering\sffamily\normalsize}}
+\makeatother
+
+\usepackage{xpinyin}  % 汉语拼音
+\xpinyinsetup{ratio={.8},$if(nomultipinyin)$$else$multiple={\color{red}},$endif$hsep={.4em plus .1em},vsep={1em}}
+
+\usepackage{color}    % 使用颜色
+
+$if(numbersections)$
+\setcounter{secnumdepth}{5}
+$else$
+\setcounter{secnumdepth}{0}
+$endif$
+$if(verbatim-in-note)$
+\VerbatimFootnotes % allows verbatim text in footnotes
+$endif$
+$if(lang)$
+\ifxetex
+  \usepackage{polyglossia}
+  \setmainlanguage{$mainlang$}
+\else
+  \usepackage[$lang$]{babel}
+\fi
+$endif$
+
+$if(title)$
+\title{$title$}
+$endif$
+$if(subtitle)$
+\subtitle{$subtitle$}
+$endif$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+\date{$date$}
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+\begin{document}
+$if(cover-image)$   % 图片封面
+\newgeometry{top=0cm,bottom=0cm,left=0cm,right=0cm}
+{\centering\includegraphics[width=\paperwidth,height=\paperheight]{$cover-image$}}
+\restoregeometry
+$else$              % 绘制封面
+\definecolor{CoverBlue}{RGB}{54,107,186}
+\definecolor{CoverPeru}{RGB}{189,95,41}
+\definecolor{CoverOlive}{RGB}{155,134,27}
+\definecolor{CoverDarkGray}{RGB}{84,85,90}
+\definecolor{CoverLightGray}{RGB}{203,199,190}
+\definecolor{CoverDarkCyan}{RGB}{56,103,113}
+\definecolor{CoverOliveDark}{RGB}{52,50,29}
+\definecolor{TextDarkCoffee}{RGB}{102,51,0}
+\definecolor{TextLightCoffee}{RGB}{140,98,56}
+
+\newgeometry{top=1cm,bottom=1cm,left=1.5cm,right=1cm}
+\pagecolor{CoverLightGray}
+\marginpar{
+  \setlength{\unitlength}{1mm}
+  \color{TextDarkCoffee}
+  \begin{picture}(90,120)
+    \linethickness{1pt}
+    \put(-77,10){\line(0,1){130}}
+    \put(-84,10){\line(0,1){130}}
+    \put(-85,30){\line(1,0){8}}
+    \put(-85,56){\line(1,0){8}}
+    \put(-85,92){\line(1,0){8}}
+    \put(-85,118){\line(1,0){8}}
+  \end{picture}
+}
+{\raggedleft\color{TextDarkCoffee}
+  \sffamily\bfseries
+  \LARGE $title$\par
+  \Large $subtitle$\par
+  \vspace{0.4cm}
+  \ttfamily\mdseries\normalsize
+  $for(author)$$author$\par$endfor$
+  \vfill
+  \rmfamily\mdseries\normalsize
+  \setlength{\parskip}{0em}
+  \rule{6em}{0.4pt}\par
+  $ebook-publisher$\par
+  $ebook-date$\par
+  $ebook-id$\par
+}
+\restoregeometry
+\pagecolor{white}
+$endif$
+$if(illustration)$  % 插画
+\newgeometry{top=0cm,bottom=0cm,left=0cm,right=0cm}
+$for(illustration)$
+\begin{figure}[p]
+\centering\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{$illustration$}
+\end{figure}
+$endfor$
+\restoregeometry
+$endif$
+
+$if(title)$   % 首页
+\newgeometry{top=2cm,bottom=2cm,left=1cm,right=1cm}
+\linespread{1.8}\selectfont     % 设置行距
+\newpage
+\begin{pinyinscope}
+{\centering
+\sffamily\bfseries\LARGE
+$title$\par
+\vspace{2ex}
+\rmfamily\bfseries\large
+$for(author)$$author$\par$endfor$
+}
+\end{pinyinscope}
+$if(abstract)$
+\vfill
+$abstract$
+$endif$
+\restoregeometry
+$endif$
+
+$for(include-before)$
+$include-before$
+$endfor$
+
+$if(toc)$
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{$toc-depth$}
+\newpage
+\pdfbookmark[1]{\contentsname}{contents}
+\tableofcontents
+}
+$endif$
+
+\linespread{1.8}\selectfont     % 设置行距
+\newpage
+\begin{pinyinscope}
+$body$
+\end{pinyinscope}
+\clearpage
+
+$if(natbib)$
+$if(biblio-files)$
+$if(biblio-title)$
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+\bibliography{$biblio-files$}
+
+$endif$
+$endif$
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+
+$endif$
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}
