@@ -226,13 +226,11 @@ $else$  % 绘制封面
   \color{TextDarkCoffee}
   \begin{picture}(9,12)
     \linethickness{1pt}
-    \put(-8,0){\line(0,1){15}}
-    \put(-8.7,0){\line(0,1){15}}
-    \put(-9,3){\line(1,0){1}}
-    \put(-9,5.2){\line(1,0){1}}
-    \put(-9,7.4){\line(1,0){1}}
-    \put(-9,9.6){\line(1,0){1}}
-    \put(-9,11.8){\line(1,0){1}}
+    \put(-8.1,0){\line(0,1){15}}
+    \put(-9,3){\line(1,0){0.9}}
+    \put(-9,6){\line(1,0){0.9}}
+    \put(-9,8.8){\line(1,0){0.9}}
+    \put(-9,11.8){\line(1,0){0.9}}
   \end{picture}
 }
 { \raggedleft\color{TextDarkCoffee}
