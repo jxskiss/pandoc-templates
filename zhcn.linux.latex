@@ -45,24 +45,27 @@ $endif$
 \XeTeXlinebreaklocale "zh"  % 針對中文自動換行
 \XeTeXlinebreakskip = 0pt plus 1pt % 字與字之間加入0pt至1pt的間距，確保左右對整齊
 
-% Miscellaneous Symbols, Yijing Hexagram Symbols
-% 易经八卦，阴、阳爻, 易经六十四卦等
-\xeCJKDeclareSubCJKBlock{YiJing}{ "2600 -> "26FF, "4DC0 -> "4DFF }
-\xeCJKDeclareSubCJKBlock{ExtB}{ "20000 -> "2A6DF }
-% UNICODE保留区域
-\xeCJKDeclareSubCJKBlock{SPUA}{ "E400 -> "E4DA , "E500 -> "E5E8 , "E600 -> "E6CE }
-% 设定中文字型
-\setCJKmainfont[BoldFont=FZYaSong-M-GBK,ItalicFont=FangSong,%
-                YiJing=Segoe UI Symbol,ExtB=SimSun-ExtB,%
-                SPUA=SunmanPUA]{SimSun}
-\setCJKsansfont[BoldFont=FZLanTingHei-B-GBK,Scale=0.95]{FZLanTingHei-M-GBK}
-\setCJKmonofont[BoldFont=FZWeiBei-S03]{Adobe Kaiti Std}
-\setCJKfallbackfamilyfont{\CJKrmdefault}[AutoFakeBold]{HanaMinA,HanaMinB}
-\setCJKfallbackfamilyfont{\CJKttdefault}[AutoFakeBold]{FZKaiS-Extended,FZKaiS-Extended(SIP)}
+% % Miscellaneous Symbols, Yijing Hexagram Symbols
+% % 易经八卦，阴、阳爻, 易经六十四卦等
+% \xeCJKDeclareSubCJKBlock{YiJing}{ "2600 -> "26FF, "4DC0 -> "4DFF }
+% \xeCJKDeclareSubCJKBlock{ExtB}{ "20000 -> "2A6DF }
+% % UNICODE保留区域
+% \xeCJKDeclareSubCJKBlock{SPUA}{ "E400 -> "E4DA , "E500 -> "E5E8 , "E600 -> "E6CE }
+% % 设定中文字型
+% \setCJKmainfont[BoldFont=FZYaSong-M-GBK,ItalicFont=FangSong,%
+%                 YiJing=Segoe UI Symbol,ExtB=SimSun-ExtB,%
+%                 SPUA=SunmanPUA]{SimSun}
+% \setCJKsansfont[BoldFont=FZLanTingHei-B-GBK,Scale=0.95]{FZLanTingHei-M-GBK}
+% \setCJKmonofont[BoldFont=FZWeiBei-S03]{Adobe Kaiti Std}
+% \setCJKfallbackfamilyfont{\CJKrmdefault}[AutoFakeBold]{HanaMinA,HanaMinB}
+% \setCJKfallbackfamilyfont{\CJKttdefault}[AutoFakeBold]{FZKaiS-Extended,FZKaiS-Extended(SIP)}
+\setCJKmainfont{Adobe Song Std}
+\setCJKsansfont{Adobe Heiti Std}
+\setCJKmonofont{Adobe Kaiti Std}
 % 设定英文字型
-\setmainfont{Times New Roman}
-\setsansfont{Calibri}   % 英文衬线字型
-\setmonofont{Consolas} % 英文等宽字型
+\setmainfont{Latin Modern Roman}  % 英文非衬线字型
+\setsansfont{Latin Modern Sans}   % 英文衬线字型
+\setmonofont{Courier}  % 英文等宽字型
 
 \linespread{1.2}\selectfont   % 行距
 \parindent 2em                % 段落縮進
